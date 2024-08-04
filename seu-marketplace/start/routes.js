@@ -51,4 +51,4 @@ Route.delete('/produto-categorias/:id', 'ProdutoCategoriaController.destroy')
 
 
 
-Route.on('/').render('welcome')
+Route.on('/').render('index')
