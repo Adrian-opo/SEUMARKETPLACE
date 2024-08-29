@@ -49,6 +49,6 @@ Route.get('/produto-categorias/:id', 'ProdutoCategoriaController.show')
 Route.put('/produto-categorias/:id', 'ProdutoCategoriaController.update')
 Route.delete('/produto-categorias/:id', 'ProdutoCategoriaController.destroy')
 
-
-
 Route.on('/').render('index')
+
+
