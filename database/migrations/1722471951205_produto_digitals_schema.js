@@ -9,7 +9,8 @@ class ProdutoDigitalSchema extends Schema {
       table.string('nome', 255).notNullable()
       table.text('descricao').notNullable()
       table.decimal('preco', 10, 2).notNullable()
-      table.string('tipo_arquivo', 10).notNullable()
+      table.string('tipo_gift', 10).notNullable()
+      table.string('serial', 255)
       table.timestamps()
     })
   }

@@ -7,12 +7,12 @@ class ProdutoDigitalController {
   }
 
   async store ({ request, response }) {
-    const produtoInfo = request.only(['nome', 'descricao', 'preco', 'tipo_arquivo'])
+    const produtoInfo = request.only(['nome', 'descricao', 'preco', 'tipo_gift'])
     const produto = new ProdutoDigital()
     produto.nome = produtoInfo.nome
     produto.descricao = produtoInfo.descricao
     produto.preco = produtoInfo.preco
-    produto.tipo_arquivo = produtoInfo.tipo_arquivo
+    produto.tipo_gift = produtoInfo.tipo_gift
 
     await produto.save()
     return response.status(201).json(produto)
@@ -24,7 +24,7 @@ class ProdutoDigitalController {
   }
 
   async update ({ params, request, response }) {
-    const produtoInfo = request.only(['nome', 'descricao', 'preco', 'tipo_arquivo'])
+    const produtoInfo = request.only(['nome', 'descricao', 'preco', 'tipo_gift'])
     const produto = await ProdutoDigital.find(params.id)
 
     if (!produto) {
@@ -34,7 +34,7 @@ class ProdutoDigitalController {
     produto.nome = produtoInfo.nome
     produto.descricao = produtoInfo.descricao
     produto.preco = produtoInfo.preco
-    produto.tipo_arquivo = produtoInfo.tipo_arquivo
+    produto.tipo_gift = produtoInfo.tipo_gift
 
     await produto.save()
     return response.status(200).json(produto)

@@ -14,10 +14,10 @@ const Server = use('Server')
 */
 const globalMiddleware = [
   'Adonis/Middleware/BodyParser',
-  'Adonis/Middleware/Session',
-  'Adonis/Middleware/Shield',
-  'Adonis/Middleware/AuthInit',
-  'App/Middleware/ConvertEmptyStringsToNull',
+  // 'Adonis/Middleware/Session',
+  // 'Adonis/Middleware/Shield',
+  // 'Adonis/Middleware/AuthInit',
+  // 'App/Middleware/ConvertEmptyStringsToNull',
 ]
 
 /*
