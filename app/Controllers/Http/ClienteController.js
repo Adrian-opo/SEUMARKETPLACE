@@ -8,13 +8,10 @@ class ClienteController {
 
   async store ({ request, response }) {
     const clienteInfo = request.only(['nome', 'email', 'telefone', 'endereco'])
-    const cliente = new Cliente()
-    cliente.nome = clienteInfo.nome
-    cliente.email = clienteInfo.email
-    cliente.telefone = clienteInfo.telefone
-    cliente.endereco = clienteInfo.endereco
+    
+    // Método correto para criar um novo cliente
+    const cliente = await Cliente.create(clienteInfo)
 
-    await cliente.save()
     return response.status(201).json(cliente)
   }
 
@@ -53,3 +50,4 @@ class ClienteController {
 }
 
 module.exports = ClienteController
+

@@ -49,6 +49,11 @@ Route.get('/produto-categorias/:id', 'ProdutoCategoriaController.show')
 Route.put('/produto-categorias/:id', 'ProdutoCategoriaController.update')
 Route.delete('/produto-categorias/:id', 'ProdutoCategoriaController.destroy')
 
+Route.get('/produtos-digitais', 'ProdutoDigitalController.index')
+Route.post('/produtos-digitais', 'ProdutoDigitalController.store')
+Route.get('/produtos-digitais/:id', 'ProdutoDigitalController.show')
+Route.put('/produtos-digitais/:id', 'ProdutoDigitalController.update')
+
 Route.on('/').render('index')
 
 
