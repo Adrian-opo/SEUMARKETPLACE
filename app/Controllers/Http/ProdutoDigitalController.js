@@ -7,22 +7,31 @@ class ProdutoDigitalController {
   }
 
   async store ({ request, response }) {
-    const produtoInfo = request.only(['nome', 'descricao', 'preco', 'tipo_gift'])
+    const produtoInfo = request.only(['nome', 'descricao', 'preco'])
+
+    // Criar o produto digital
+    console.log(produtoInfo)
     const produto = new ProdutoDigital()
     produto.nome = produtoInfo.nome
     produto.descricao = produtoInfo.descricao
     produto.preco = produtoInfo.preco
-    produto.tipo_gift = produtoInfo.tipo_gift
-
     await produto.save()
+
+    // Associar categorias ao produto
+    const categoriasIds = request.input('categorias') // Array de IDs de categorias
+    await produto.categorias().attach(categoriasIds)
+
     return response.status(201).json(produto)
   }
 
   async show ({ params, response }) {
-    const produto = await ProdutoDigital.find(params.id)
+    const produto = await ProdutoDigital.query()
+      .where('id', params.id)
+      .with('categorias')
+      .first()
+
     return response.json(produto)
   }
-
   async update ({ params, request, response }) {
     const produtoInfo = request.only(['nome', 'descricao', 'preco', 'tipo_gift'])
     const produto = await ProdutoDigital.find(params.id)

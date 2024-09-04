@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seu Gift Card</title>
+    <title>Seus Seriais do Gift Card</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,14 +37,11 @@
         .content p {
             margin: 10px 0;
         }
-        .serial-box {
+        .product {
             background-color: #f9f9f9;
             border-left: 4px solid #4CAF50;
             padding: 10px;
             margin: 20px 0;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #555;
         }
         .footer {
             text-align: center;
@@ -60,14 +57,21 @@
             <h1>Parabéns pela sua compra!</h1>
         </div>
         <div class="content">
-            <h2>Olá,</h2>
-            <p>Obrigado por adquirir <strong>{{ nome }}</strong> no nosso marketplace.</p>
-            <p>{{ descricao }}</p>
-            <p>Seu produto está pronto para ser utilizado. Aqui está o serial do seu Gift Card:</p>
-            <div class="serial-box">
-                {{ serial }}
-            </div>
-            <p>Use este serial para ativar o seu Gift Card e aproveite!</p>
+            <h2>Olá, {{ cliente }}!</h2>
+            <p>Obrigado por adquirir nossos produtos. Aqui estão os detalhes dos produtos comprados:</p>
+
+            @each(produto in produtos)
+                <div class="product">
+                    <h3>{{ produto.nome }} (Quantidade: {{ produto.quantidade }})</h3>
+                    <p>{{ produto.descricao }}</p>
+                    <p><strong>Categorias:</strong> {{ produto.categorias }}</p>
+                    <h3>Lembresse esse serial tem o a quntidade de uso limitado a  {{ produto.quantidade }}!</h3>
+                    <p><strong>Serial:</strong> {{ produto.serial }}</p>
+                    <p><strong>Valor Unitário:</strong> R$ {{ produto.valor_unitario.toFixed(2) }}</p>
+                </div>
+            @endeach
+
+            <p>Use os seriais acima para ativar seus Gift Cards e aproveite!</p>
         </div>
         <div class="footer">
             <p>Atenciosamente,<br>Seu Marketplace</p>

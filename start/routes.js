@@ -49,9 +49,18 @@ Route.get('/produto-categorias/:id', 'ProdutoCategoriaController.show')
 Route.put('/produto-categorias/:id', 'ProdutoCategoriaController.update')
 Route.delete('/produto-categorias/:id', 'ProdutoCategoriaController.destroy')
 
+<<<<<<< HEAD
 
 Route.on('/').render('index.edge')  // Home
 Route.on('/contact').render('contact.edge')  // Contato
 // Adicione mais conforme necessário
+=======
+Route.get('/produtos-digitais', 'ProdutoDigitalController.index')
+Route.post('/produtos-digitais', 'ProdutoDigitalController.store')
+Route.get('/produtos-digitais/:id', 'ProdutoDigitalController.show')
+Route.put('/produtos-digitais/:id', 'ProdutoDigitalController.update')
+
+Route.on('/').render('index')
+>>>>>>> f5a31834e0d4f1ab59a704a21e9b893070b41ee6
 
 
