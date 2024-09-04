@@ -1,5 +1,11 @@
 const Route = use('Route')
 
+Route.post('/carrinho/add', 'CarrinhoController.addToCart')  // Adicionar produto ao carrinho
+Route.get('/carrinho/:cliente_id', 'CarrinhoController.getCarrinho');
+Route.post('/pedidos/finalizar', 'PedidoController.finalizarPedido');  // Finalizar o pedido
+Route.get('/cart/:id', 'CarrinhoController.show')
+Route.get('/checkout', 'CarrinhoController.showCheckoutPage')  // Adicione esta linha para renderizar a página de checkout
+Route.post('/checkout', 'CarrinhoController.finalizarPedido')  
 // ProdutoDigital Routes
 Route.get('/produto-digitals', 'ProdutoDigitalController.index')
 Route.post('/produto-digitals', 'ProdutoDigitalController.store')
@@ -54,12 +60,12 @@ Route.post('/produtos-digitais', 'ProdutoDigitalController.store')
 Route.get('/produtos-digitais/:id', 'ProdutoDigitalController.show')
 Route.put('/produtos-digitais/:id', 'ProdutoDigitalController.update')
 
-Route.on('/').render('index.edge')  // Home
+Route.get('/', 'ProdutoDigitalController.index')  // Home
 Route.on('/contact').render('contact.edge')  // Contato
-Route.on('/cart').render('cart.edge')  // Carrinho
+Route.get('/cart', 'CarrinhoController.showCart')  // Carrinho
 Route.on('/chackout').render('chackout.edge')  // Chackout
 Route.on('/404').render('404.edge')  // Erro
 Route.on('/detail').render('shop-detail.edge')  // Produto detalhado
 Route.on('/shop').render('shop.edge')  // 
-Route.on('/testimonial').render('testimonial.edge')  // Testemunhos
-Route.on('/produtoDigital').render('cadastro-produto-digital.edge')  // Testemunhos
+Route.on('/testimonial').render('testimonial.edge') 
+Route.get('/produtoDigital', 'ProdutoDigitalController.showCadastroPage')

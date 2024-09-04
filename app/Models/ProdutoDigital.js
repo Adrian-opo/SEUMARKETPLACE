@@ -13,6 +13,9 @@ class ProdutoDigital extends Model {
   categorias () {
     return this.belongsToMany('App/Models/Categoria').pivotTable('produto_categorias')
   }
+  categoria() {
+    return this.belongsTo('App/Models/Categoria') // Define que cada produto pertence a uma categoria
+  }
 }
 
 module.exports = ProdutoDigital

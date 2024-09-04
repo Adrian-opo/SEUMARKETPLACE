@@ -28,8 +28,12 @@
     "@adonisjs/mail": "^3.1.0",
     "@adonisjs/session": "^1.0.27",
     "@adonisjs/shield": "^1.0.8",
+    "jquery.easing": "^1.4.1",
+    "lightbox2": "^2.11.4",
     "mysql": "^2.18.1",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "owl.carousel": "^2.3.4",
+    "waypoints": "^4.0.1"
   },
   "autoload": {
     "App": "./app"

@@ -81,6 +81,52 @@ class PedidoController {
     return response.status(201).json(pedido)
   }
 
+  async finalizarPedido ({ request, response }) {
+    const { cliente_id, forma_pagamento_id } = request.only(['cliente_id', 'forma_pagamento_id'])
+
+    // Recuperar o carrinho do cliente
+    const carrinho = await Carrinho.query().where('cliente_id', 1).with('itens').first()
+
+    if (!carrinho || !carrinho.itens.length) {
+      return response.status(400).json({ error: 'Carrinho está vazioaa' })
+    }
+
+    // Cria o pedido
+    const pedido = new Pedido()
+    pedido.data_pedido = new Date()
+    pedido.status = 'pendente'
+    pedido.valor_total = carrinho.itens.reduce((total, item) => total + (item.quantidade * item.produto.preco), 0)
+    pedido.cliente_id = cliente_id
+    pedido.forma_pagamento_id = forma_pagamento_id
+    await pedido.save()
+
+    // Processa cada item do carrinho e associa ao pedido
+    for (let item of carrinho.itens) {
+      const produto = await ProdutoDigital.find(item.produto_digital_id)
+      
+      // Verifica estoque
+      if (produto.quantidade_disponivel < item.quantidade) {
+        return response.status(400).json({ error: `Quantidade insuficiente para o produto: ${produto.nome}` })
+      }
+
+      produto.quantidade_disponivel -= item.quantidade
+      await produto.save()
+
+      const produtoPedido = new ProdutoPedido()
+      produtoPedido.pedido_id = pedido.id
+      produtoPedido.produto_digital_id = item.produto_digital_id
+      produtoPedido.quantidade = item.quantidade
+      produtoPedido.valor_unitario = produto.preco
+      produtoPedido.serial = crypto.randomBytes(16).toString('hex')
+      await produtoPedido.save()
+    }
+
+    // Limpa o carrinho
+    await carrinho.itens().delete()
+
+    return response.status(200).json({ message: 'Pedido concluído', pedido })
+  }
+  
   async index ({ response }) {
     let pedidos = await Pedido.all()
     return response.json(pedidos)
