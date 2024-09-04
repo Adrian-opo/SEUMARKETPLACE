@@ -49,6 +49,9 @@ Route.get('/produto-categorias/:id', 'ProdutoCategoriaController.show')
 Route.put('/produto-categorias/:id', 'ProdutoCategoriaController.update')
 Route.delete('/produto-categorias/:id', 'ProdutoCategoriaController.destroy')
 
-Route.on('/').render('index')
+
+Route.on('/').render('index.edge')  // Home
+Route.on('/contact').render('contact.edge')  // Contato
+// Adicione mais conforme necessário
 
 
