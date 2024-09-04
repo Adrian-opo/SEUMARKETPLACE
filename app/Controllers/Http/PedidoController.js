@@ -24,40 +24,44 @@ class PedidoController {
       return response.status(404).json({ error: 'Cliente não encontrado' })
     }
 
-    // Criando os produtos associados ao pedido e gerando os seriais
+    // Criando os produtos associados ao pedido e verificando a quantidade disponível
     const itensInfo = request.input('itens')
-    console.log(itensInfo)
     const produtosInfo = []
 
     for (let item of itensInfo) {
+      const produto = await ProdutoDigital.find(item.produto_digital_id)
+
+      // Verificar se há quantidade suficiente disponível
+      if (produto.quantidade_disponivel < item.quantidade) {
+        return response.status(400).json({ error: `Quantidade insuficiente para o produto: ${produto.nome}` })
+      }
+
+      // Atualizar a quantidade disponível (diminuindo a quantidade comprada)
+      produto.quantidade_disponivel -= item.quantidade
+      await produto.save()  // Salvar a nova quantidade no banco
+
+      // Criar o produto do pedido
       const produtoPedido = new ProdutoPedido()
       produtoPedido.pedido_id = pedido.id
       produtoPedido.produto_digital_id = item.produto_digital_id
       produtoPedido.quantidade = item.quantidade
       produtoPedido.valor_unitario = item.valor_unitario
+
       // Gera serial para cada item
       produtoPedido.serial = crypto.randomBytes(16).toString('hex')
       await produtoPedido.save()
 
-      // Recupera o produto digital e suas categorias associadas
-      const produto = await ProdutoDigital.query()
-        .where('id', item.produto_digital_id)
-        .with('categorias')
-        .first()
-
-      const categorias = produto.toJSON().categorias.map(c => c.nome).join(', ')
-
-      // Adiciona o produto e as categorias ao array para o envio do e-mail
+      // Adicionar ao array para o envio de e-mail
       produtosInfo.push({
         nome: produto.nome,
         descricao: produto.descricao,
-        categorias: categorias, // Inclui as categorias do produto
+        categorias: (await produto.categorias().fetch()).toJSON().map(c => c.nome).join(', '),
         serial: produtoPedido.serial,
         quantidade: produtoPedido.quantidade,
         valor_unitario: produtoPedido.valor_unitario
       })
     }
-    console.log(produtosInfo)
+
     // Enviar um único e-mail com todos os produtos do pedido
     try {
       await Mail.send('emails.serial', { cliente: cliente.nome, produtos: produtosInfo }, (message) => {
@@ -71,7 +75,6 @@ class PedidoController {
       pedido.status = 'concluído'
       await pedido.save()
     } catch (error) {
-      console.log(error)
       return response.status(500).json({ error: 'Erro ao enviar o e-mail ou atualizar o pedido' })
     }
 
