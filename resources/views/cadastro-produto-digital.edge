@@ -27,6 +27,7 @@
     
         <!-- Template Stylesheet -->
         <link href="/assets/css/style.css" rel="stylesheet">
+
     </head>
 
     <body>
@@ -49,7 +50,7 @@
                     <div class="top-link pe-2">
                         <a href="#" class="text-white"><small class="text-white mx-2">Política de Privacidade</small>/</a>
                         <a href="#" class="text-white"><small class="text-white mx-2">Termos de Uso</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">Vendas e Reembolsos</small></a>
+                        <a href="#" class="text-white"><small class="text-white ms-2">Vendas e reembolsos</small></a>
                     </div>
                 </div>
             </div>
@@ -61,7 +62,7 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="/" class="nav-item nav-link">Home</a>
+                            <a href="/" class="nav-item nav-link active">Home</a>
                             <a href="/produtoDigital" class="nav-item nav-link">Cadastro Digital</a>
                             <a href="/contact" class="nav-item nav-link">Contato</a>
                         </div>
@@ -100,73 +101,29 @@
             </div>
         </div>
         <!-- Modal Search End -->
-
-
-        <!-- Single Page Header start -->
-        <div class="container-fluid page-header py-5">
-            <h1 class="text-center text-white display-6">Contato</h1>
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active text-white">Contato</li>
-            </ol>
-        </div>
-        <!-- Single Page Header End -->
-
-
-        <!-- Contact Start -->
-        <div class="container-fluid contact py-5">
-            <div class="container py-5">
-                <div class="p-5 bg-light rounded">
-                    <div class="row g-4">
-                        <div class="col-12">
-                            <div class="text-center mx-auto" style="max-width: 700px;">
-                                <h1 class="text-primary">Entre em contato</h1>
-                                <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="h-100 rounded">
-                                <iframe class="rounded w-100" 
-                                style="height: 400px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1694259649153!5m2!1sen!2sbd" 
-                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <form action="" class="">
-                                <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Seu nome">
-                                <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Digite seu e-mail">
-                                <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Sua mensagem"></textarea>
-                                <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Enviar</button>
-                            </form>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="d-flex p-4 rounded mb-4 bg-white">
-                                <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Endereço</h4>
-                                    <p class="mb-2">Rua Guaratiriba - 54, Ji-Paraná</p>
-                                </div>
-                            </div>
-                            <div class="d-flex p-4 rounded mb-4 bg-white">
-                                <i class="fas fa-envelope fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Envie-nos um e-mail</h4>
-                                    <p class="mb-2">marketplace@exemplo.com</p>
-                                </div>
-                            </div>
-                            <div class="d-flex p-4 rounded bg-white">
-                                <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
-                                <div>
-                                    <h4>Telefone</h4>
-                                    <p class="mb-2">(+069) 99239-2770</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        
+        <!-- Cadastro Page Start -->
+        <div class="container">
+            <h1>Cadastro de Produto Digital</h1>
+            
+            <form action="/produtos-digitais" method="POST">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" class="form-control" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="preco">Preço:</label>
+                    <input type="text" id="preco" name="preco" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
         </div>
-        <!-- Contact End -->
+
+        <!-- Cadastro Page End -->
 
 
         <!-- Footer Start -->
@@ -182,7 +139,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="position-relative mx-auto">
-                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Seu E-mail">
+                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Seu Email">
                                 <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Assine agora</button>
                             </div>
                         </div>

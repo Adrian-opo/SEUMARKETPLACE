@@ -56,5 +56,10 @@ Route.put('/produtos-digitais/:id', 'ProdutoDigitalController.update')
 
 Route.on('/').render('index.edge')  // Home
 Route.on('/contact').render('contact.edge')  // Contato
-
-
+Route.on('/cart').render('cart.edge')  // Carrinho
+Route.on('/chackout').render('chackout.edge')  // Chackout
+Route.on('/404').render('404.edge')  // Erro
+Route.on('/detail').render('shop-detail.edge')  // Produto detalhado
+Route.on('/shop').render('shop.edge')  // 
+Route.on('/testimonial').render('testimonial.edge')  // Testemunhos
+Route.on('/produtoDigital').render('cadastro-produto-digital.edge')  // Testemunhos
